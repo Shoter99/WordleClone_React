@@ -7,7 +7,7 @@ const Grid = (props: Props) => {
   return (
     <div className='grid place-items-center'>
       {props.grid.map((value, index) => (
-        <GridRow key={index} gridRow={value} />
+        <GridRow key={index} id={index} gridRow={value} />
       ))}
     </div>
   )

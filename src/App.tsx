@@ -15,7 +15,9 @@ function App() {
       ['','','','',''],
     ]
   );
-  let currentRow = 0
+  const [windScreen, setWinScreen] = useState(false);
+  const [word, setWord] = useState("three");
+  let currentRow = 0;
 
 
   const onKeyDown = (e: any) => {
@@ -26,8 +28,7 @@ function App() {
       setGrid(deleteLastOne(newGrid))
     }
     if(key === "Enter" && checkIfRowIsFull(grid)){
-      console.log(currentRow);
-      
+      checkGuess(grid[currentRow], word);
       currentRow+=1;
     }
     if(key.length !== 1 || !pattern.test(key)) return
@@ -52,6 +53,25 @@ function App() {
     return grid;
   }
 
+  const checkGuess = (gridRow: string[], word: string) => {
+    let correctGuesses = 0;
+    for(let i = 0; i < 5; i++){
+      let gridCell = document.querySelector(`#cell${currentRow}${i}`)?.classList;
+      if(gridRow[i] === word[i]){
+        gridCell?.add("bg-green-500");
+        correctGuesses+=1;
+      }
+      else if(word.includes(gridRow[i])){
+        gridCell?.add("bg-yellow-500");
+      }
+      else{
+        gridCell?.add("bg-gray-500");
+      }
+    }
+    if(correctGuesses === 5){
+      setWinScreen(true);
+    }
+  }
 
   const addNewLetter = (letter : string, grid : string[][]) => {
         for(let j = 0; j < 5; j++){
