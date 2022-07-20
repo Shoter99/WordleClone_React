@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Grid from "./components/Grid";
 import WinScreen from "./components/WinScreen";
 import LoseScreen from "./components/LoseScreen";
-
+import {words} from "./utils/words";
 function App() {
 
   const [grid, setGrid] = useState(
@@ -19,7 +19,7 @@ function App() {
   );
   const [winScreen, setWinScreen] = useState(false);
   const [loseScreen, setLoseScreen] = useState(false);
-  const [word, setWord] = useState("three");
+  let word:string;
   let currentRow = 0;
 
 
@@ -96,7 +96,13 @@ function App() {
 
 
   useEffect(() => {
+    
+    let rand = Math.floor(Math.random() * 5758)
+    
+    word = words[rand];
+
     document.addEventListener("keydown", onKeyDown, true)
+
   }, [])
 
 
