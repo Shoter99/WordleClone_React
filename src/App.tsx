@@ -15,25 +15,37 @@ function App() {
       ['','','','',''],
     ]
   );
+  let currentRow = 0
 
 
   const onKeyDown = (e: any) => {
     let key : string = e.key;
     const pattern = /[a-z]/i;
     let newGrid = [...grid];
-    if(key == "Backspace"){
+    if(key === "Backspace"){
       setGrid(deleteLastOne(newGrid))
     }
-    if(key.length != 1 || !pattern.test(key)) return
+    if(key === "Enter" && checkIfRowIsFull(grid)){
+      console.log(currentRow);
+      
+      currentRow+=1;
+    }
+    if(key.length !== 1 || !pattern.test(key)) return
     setGrid(addNewLetter(key, newGrid))
     
   }
 
+  const checkIfRowIsFull = (grid: string[][]) => {
+    for(let i = 0; i < 5; i++){
+      if(grid[currentRow][i] === "") return false;
+    }
+    return true;
+  }
 
   const deleteLastOne = (grid : string[][]) => {
     for(let i = 4; i >= 0; i--){
-      if(grid[0][i] != ''){
-        grid[0][i] = '';
+      if(grid[currentRow][i] !== ''){
+        grid[currentRow][i] = '';
         return grid;
       }
     }
@@ -43,8 +55,8 @@ function App() {
 
   const addNewLetter = (letter : string, grid : string[][]) => {
         for(let j = 0; j < 5; j++){
-          if(grid[0][j] == ""){
-            grid[0][j] = letter;
+          if(grid[currentRow][j] === ""){
+            grid[currentRow][j] = letter;
             return grid
           }
       }
