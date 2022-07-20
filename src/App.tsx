@@ -1,11 +1,12 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div>
-      <header className="text-3xl text-red-500">Wordle Clone</header>
+      <Header />
     </div>
   );
 }
