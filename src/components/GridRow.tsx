@@ -1,14 +1,14 @@
 import React from 'react'
 import GridCell from './GridCell'
-
-const GridRow = () => {
+interface Props{
+    gridRow: string[];
+}
+const GridRow = (props: Props) => {
   return (
     <div className="flex flex-row p-3">
-        <GridCell />
-        <GridCell />
-        <GridCell />
-        <GridCell />
-        <GridCell />
+        {props.gridRow.map((value, index) => (
+            <GridCell key={index} chr={value} />
+        ))}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header";
@@ -6,12 +6,25 @@ import Grid from "./components/Grid";
 
 function App() {
 
+  const [grid, setGrid] = useState<string[][]>(
+    [
+      ['','','','',''],
+      ['','','','',''],
+      ['','','','',''],
+      ['','','','',''],
+      ['','','','',''],
+      ['','','','',''],
+    ]
+  )
 
+  const onKeyDown = (e: any) => {
+    console.log(e)
+  }
   return (
-    <div>
+    <div onKeyDown={(e) => onKeyDown(e)}>
       <Header />
       <div className="p-6"></div>
-      <Grid />
+      <Grid grid={grid}/>
     </div>
   );
 }

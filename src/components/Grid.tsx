@@ -1,14 +1,14 @@
 import React from 'react'
 import GridRow from './GridRow'
-
-const Grid = () => {
+interface Props{
+  grid: string[][];
+}
+const Grid = (props: Props) => {
   return (
     <div className='grid place-items-center'>
-      <GridRow />
-      <GridRow />
-      <GridRow />
-      <GridRow />
-      <GridRow />
+      {props.grid.map((value, index) => (
+        <GridRow key={index} gridRow={value} />
+      ))}
     </div>
   )
 }
