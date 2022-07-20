@@ -5,7 +5,7 @@ import Grid from "./components/Grid";
 
 function App() {
 
-  const [grid, setGrid] = useState<string[][]>(
+  const [grid, setGrid] = useState(
     [
       ['','','','',''],
       ['','','','',''],
@@ -14,25 +14,42 @@ function App() {
       ['','','','',''],
       ['','','','',''],
     ]
-  )
-  const [currentIndex, setCurrentIndex] = useState(0)
+  );
 
 
   const onKeyDown = (e: any) => {
     let key : string = e.key;
     const pattern = /[a-z]/i;
-    
-    if(key.length != 1 || !pattern.test(key)) return
     let newGrid = [...grid];
-    newGrid[0][currentIndex] = key;
-
-    setGrid(newGrid);
-    addNewLetter(key);
+    if(key == "Backspace"){
+      setGrid(deleteLastOne(newGrid))
+    }
+    if(key.length != 1 || !pattern.test(key)) return
+    setGrid(addNewLetter(key, newGrid))
     
   }
-  const addNewLetter = (letter : string) => {
-    let newGrid = [...grid];
-    console.log(newGrid);
+
+
+  const deleteLastOne = (grid : string[][]) => {
+    for(let i = 4; i >= 0; i--){
+      if(grid[0][i] != ''){
+        grid[0][i] = '';
+        return grid;
+      }
+    }
+    return grid;
+  }
+
+
+  const addNewLetter = (letter : string, grid : string[][]) => {
+        for(let j = 0; j < 5; j++){
+          if(grid[0][j] == ""){
+            grid[0][j] = letter;
+            return grid
+          }
+      }
+    
+      return grid
     
   }
 

@@ -5,7 +5,7 @@ interface Props{
 }
 const GridRow = (props: Props) => {
   return (
-    <div className="flex flex-row p-3">
+    <div className="flex flex-row p-1">
         {props.gridRow.map((value, index) => (
             <GridCell key={index} chr={value} />
         ))}
