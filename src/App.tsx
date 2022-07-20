@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Grid from "./components/Grid";
 import WinScreen from "./components/WinScreen";
+import LoseScreen from "./components/LoseScreen";
 
 function App() {
 
@@ -16,7 +17,8 @@ function App() {
       ['','','','',''],
     ]
   );
-  const [windScreen, setWinScreen] = useState(false);
+  const [winScreen, setWinScreen] = useState(false);
+  const [loseScreen, setLoseScreen] = useState(false);
   const [word, setWord] = useState("three");
   let currentRow = 0;
 
@@ -71,6 +73,12 @@ function App() {
     }
     if(correctGuesses === 5){
       setWinScreen(true);
+    }else{
+      console.log(currentRow);
+      
+      if(currentRow===5){
+        setLoseScreen(true);
+      }
     }
   }
 
@@ -96,7 +104,7 @@ function App() {
     <div >
       <Header />
       <div className="p-6"></div>
-      {windScreen ? <WinScreen /> : 
+      {winScreen ? <WinScreen /> : loseScreen ? <LoseScreen /> :
       <Grid grid={grid}/>
       }
     </div>
