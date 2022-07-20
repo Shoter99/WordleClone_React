@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header";
 import Grid from "./components/Grid";
@@ -16,10 +15,25 @@ function App() {
       ['','','','',''],
     ]
   )
+  const [currentIndex, setCurrentIndex] = useState(0)
 
 
   const onKeyDown = (e: any) => {
-    console.log(e)
+    let key : string = e.key;
+    const pattern = /[a-z]/i;
+    
+    if(key.length != 1 || !pattern.test(key)) return
+    let newGrid = [...grid];
+    newGrid[0][currentIndex] = key;
+
+    setGrid(newGrid);
+    addNewLetter(key);
+    
+  }
+  const addNewLetter = (letter : string) => {
+    let newGrid = [...grid];
+    console.log(newGrid);
+    
   }
 
 
