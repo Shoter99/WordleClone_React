@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Grid from "./components/Grid";
+import WinScreen from "./components/WinScreen";
 
 function App() {
 
@@ -95,7 +96,9 @@ function App() {
     <div >
       <Header />
       <div className="p-6"></div>
+      {windScreen ? <WinScreen /> : 
       <Grid grid={grid}/>
+      }
     </div>
   );
 }
