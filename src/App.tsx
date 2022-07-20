@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header";
@@ -17,11 +17,19 @@ function App() {
     ]
   )
 
+
   const onKeyDown = (e: any) => {
     console.log(e)
   }
+
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDown, true)
+  }, [])
+
+
   return (
-    <div onKeyDown={(e) => onKeyDown(e)}>
+    <div >
       <Header />
       <div className="p-6"></div>
       <Grid grid={grid}/>
