@@ -43,7 +43,7 @@ const Keyboard = ({checkKey} : { checkKey: any}) => {
     return (
         <div className="grid place-items-center">
 
-        <div className='relative grid place-items-center border border-slate-800 m-2 rounded p-2 max-w-3xl'>
+        <div className='relative grid place-items-center border border-slate-800 w-full md:m-2 rounded p-2 max-w-3xl'>
             <div>
             <button
                 onClick={() => checkKey("Backspace")}

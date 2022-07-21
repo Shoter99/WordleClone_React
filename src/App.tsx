@@ -134,6 +134,7 @@ function App() {
       {winScreen ? <EndScreen text="You won!" word={wordToDisplay}/> : loseScreen ? <EndScreen word={wordToDisplay} text="You lost"/> :
       <>
         <Grid grid={grid}/>
+        <div className="p-2"></div>
         <Keyboard checkKey={checkKey}/>
       </>
       }
