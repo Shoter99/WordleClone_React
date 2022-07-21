@@ -5,7 +5,7 @@ const Key = ({ value, onClick }: { value: string, onClick: any }) => {
         <button
             id={`key${value}`}
             onClick={() => onClick(value)}
-            className='border rounded bg-slate-800 text-slate-200 w-8 h-8 p-1 m-1 border-slate-800'
+            className='border rounded bg-slate-800 text-slate-200 w-7 h-7 md:w-9 md:h-9 m-0.5 md:m-1 border-slate-800'
             key={value}
         >{value === "Enter" ? "\u23CE" : value.toUpperCase()}</button>
     )
