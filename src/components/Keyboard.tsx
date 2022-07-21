@@ -1,7 +1,7 @@
 import React from 'react'
 import Key from './Key'
 
-const Keyboard = () => {
+const Keyboard = ({checkKey} : { checkKey: any}) => {
 
     const keyLayout = [
         [
@@ -14,7 +14,7 @@ const Keyboard = () => {
             'u',
             'i',
             'o',
-            'p'
+            'p',
         ],
         [
             'a',
@@ -34,30 +34,42 @@ const Keyboard = () => {
             'v',
             'b',
             'n',
-            'm']
+            'm',
+            'Enter'
+        ]
 
     ]
 
     return (
-        <div className='grid place-items-center border border-slate-800 m-2 rounded p-2 md:hidden'>
+        <div className="grid place-items-center">
+
+        <div className='relative grid place-items-center border border-slate-800 m-2 rounded p-2 max-w-3xl'>
             <div>
-                {keyLayout[0].map((value) => (
-                    <Key value={value}/>
-                ))}
+            <button
+                onClick={() => checkKey("Backspace")}
+                className='absolute right-7 border rounded bg-slate-800 text-slate-200 p-1'
+                >{"Backspace"}</button>
+            </div>
+            <div className='p-6'></div>
+            <div>
+                {keyLayout[0].map((value, index) => (
+                    <Key key={index} onClick={checkKey} value={value}/>
+                    ))}
             </div>
             <div className='p-1'></div>
             <div className='px-2'>
                 {keyLayout[1].map((value, index) => (
-                    <Key value={value}/>
+                    <Key key={index} onClick={checkKey} value={value}/>
                 ))}
             </div>
             <div className='p-1'></div>
             <div className='px-3'>
                 {keyLayout[2].map((value, index) => (
-                    <Key value={value}/>
+                    <Key key={index} onClick={checkKey} value={value}/>
                 ))}
             </div>
         </div>
+    </div>
     )
     // <button
     //                 className='border rounded bg-slate-800 text-slate-200 w-8 h-8 p-1'

@@ -20,24 +20,23 @@ function App() {
   const [winScreen, setWinScreen] = useState(false);
   const [loseScreen, setLoseScreen] = useState(false);
   const [wordToDisplay, setWordToDisplay]  = useState("");
-  let word:string;
-  let currentRow = 0;
+  const [word, setWord] = useState("");
+  const [currentRow, setCurrentRow] = useState(0);
 
 
-  const onKeyDown = (e: any) => {
-    let key : string = e.key;
-    const pattern = /[a-z]/i;
-    let newGrid = [...grid];
-    if(key === "Backspace"){
-      setGrid(deleteLastOne(newGrid))
-    }
-    if(key === "Enter" && checkIfRowIsFull(grid)){
-      checkGuess(grid[currentRow], word);
-      currentRow+=1;
-    }
-    if(key.length !== 1 || !pattern.test(key)) return
-    setGrid(addNewLetter(key, newGrid))
-    
+
+  const checkKey = (key: string) => {
+      const pattern = /[a-z]/i;
+      let newGrid = [...grid];
+      if(key === "Backspace"){
+        setGrid(deleteLastOne(newGrid))
+      }
+      if(key === "Enter" && checkIfRowIsFull(grid)){
+        checkGuess(grid[currentRow], word);
+        setCurrentRow(currentRow => currentRow + 1)
+      }
+      if(key.length !== 1 || !pattern.test(key)) return
+      setGrid(addNewLetter(key, newGrid))
   }
 
   const checkIfRowIsFull = (grid: string[][]) => {
@@ -61,14 +60,24 @@ function App() {
     let correctGuesses = 0;
     for(let i = 0; i < 5; i++){
       let gridCell = document.querySelector(`#cell${currentRow}${i}`)?.classList;
+      let key = document.querySelector(`#key${gridRow[i]}`)?.classList;
+      console.log(gridRow[i]);
+      
       if(gridRow[i] === word[i]){
+        key?.add("bg-green-500");
+        key?.remove("bg-slate-800");
         gridCell?.add("bg-green-500");
         correctGuesses+=1;
       }
       else if(word.includes(gridRow[i])){
+        key?.add("bg-yellow-500");
+        key?.remove("bg-slate-800");
         gridCell?.add("bg-yellow-500");
+
       }
       else{
+        key?.add("bg-gray-500");
+        key?.remove("bg-slate-800");
         gridCell?.add("bg-gray-500");
       }
     }
@@ -97,13 +106,24 @@ function App() {
 
 
   useEffect(() => {
-    
+    // const onKeyDown = (e: any) => {
+    //   e.preventDefault();
+    //   let key : string = e.key;
+    //   console.log(key)
+    //   checkKey(key);
+      
+    // } 
+
     let rand = Math.floor(Math.random() * 246)
     
-    word = words[rand];
+    setWord(words[rand])
 
-    document.addEventListener("keydown", onKeyDown, true)
+    // document.addEventListener("keydown", onKeyDown)
 
+    // return () => {
+    //   document.removeEventListener("keydown", onKeyDown)
+    // }
+    
   }, [])
 
 
@@ -114,7 +134,7 @@ function App() {
       {winScreen ? <EndScreen text="You won!" word={wordToDisplay}/> : loseScreen ? <EndScreen word={wordToDisplay} text="You lost"/> :
       <>
         <Grid grid={grid}/>
-        <Keyboard />
+        <Keyboard checkKey={checkKey}/>
       </>
       }
     </div>
