@@ -1,7 +1,7 @@
 {
   "name": "wordle-clone",
   "version": "0.1.0",
-  "homepage": "https://shoter99.github.io/WordleClone_React",
+  "homepage": "https://Shoter99.github.io/WordleClone_React",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
