@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Grid from "./components/Grid";
-import WinScreen from "./components/WinScreen";
-import LoseScreen from "./components/LoseScreen";
 import {words} from "./utils/words";
+import EndScreen from "./components/EndScreen";
 function App() {
 
   const [grid, setGrid] = useState(
@@ -19,6 +18,7 @@ function App() {
   );
   const [winScreen, setWinScreen] = useState(false);
   const [loseScreen, setLoseScreen] = useState(false);
+  const [wordToDisplay, setWordToDisplay]  = useState("");
   let word:string;
   let currentRow = 0;
 
@@ -73,11 +73,11 @@ function App() {
     }
     if(correctGuesses === 5){
       setWinScreen(true);
+      setWordToDisplay(word);
     }else{
-      console.log(currentRow);
-      
       if(currentRow===5){
         setLoseScreen(true);
+        setWordToDisplay(word);
       }
     }
   }
@@ -97,7 +97,7 @@ function App() {
 
   useEffect(() => {
     
-    let rand = Math.floor(Math.random() * 5758)
+    let rand = Math.floor(Math.random() * 246)
     
     word = words[rand];
 
@@ -110,7 +110,7 @@ function App() {
     <div >
       <Header />
       <div className="p-6"></div>
-      {winScreen ? <WinScreen /> : loseScreen ? <LoseScreen /> :
+      {winScreen ? <EndScreen text="You won!" word={wordToDisplay}/> : loseScreen ? <EndScreen word={wordToDisplay} text="You lost"/> :
       <Grid grid={grid}/>
       }
     </div>
