@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Grid from "./components/Grid";
 import {words} from "./utils/words";
 import EndScreen from "./components/EndScreen";
+import Keyboard from "./components/Keyboard";
 function App() {
 
   const [grid, setGrid] = useState(
@@ -111,7 +112,10 @@ function App() {
       <Header />
       <div className="p-6"></div>
       {winScreen ? <EndScreen text="You won!" word={wordToDisplay}/> : loseScreen ? <EndScreen word={wordToDisplay} text="You lost"/> :
-      <Grid grid={grid}/>
+      <>
+        <Grid grid={grid}/>
+        <Keyboard />
+      </>
       }
     </div>
   );
