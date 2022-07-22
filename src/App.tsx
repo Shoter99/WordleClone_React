@@ -66,6 +66,7 @@ function App() {
       if(gridRow[i] === word[i]){
         key?.add("bg-green-500");
         key?.remove("bg-slate-800");
+        key?.remove("bg-yellow-500");
         gridCell?.add("bg-green-500");
         correctGuesses+=1;
       }
